@@ -11,8 +11,24 @@ package com.mycompany.adtarea03;
  */
 public class Provincia {
     int id;
-     String nome;
+    String nome;
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+     
     @Override
     public String toString() {
         return "Provincia{" + "id=" + id + ", nome=" + nome + '}';

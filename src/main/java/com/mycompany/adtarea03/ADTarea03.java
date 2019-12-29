@@ -6,6 +6,8 @@
 package com.mycompany.adtarea03;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import java.awt.List;
 import java.io.File;
@@ -25,21 +27,8 @@ import org.xml.sax.SAXException;
  */
 public class ADTarea03 {
     public static void main(String args[]){
-        Gson gson=new Gson();
-        provincias prov;
-        try {
-            prov = gson.fromJson(new FileReader(new File("provincias.json")),provincias.class);
-            System.out.println(prov);
-            for(Provincia p: prov.provincias){
-                System.out.println(p.toString());
-            }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(ADTarea03.class.getName()).log(Level.SEVERE, null, ex);
-        }
         VentanaPrincipal vp=new VentanaPrincipal();
         vp.setVisible(true);
-    }
-
-    
+    } 
 }
  
