@@ -12,13 +12,17 @@ import java.util.ArrayList;
  * @author Carlos
  */
 public class Tienda {
+    int id;
     private String nombre;
     private String ciudad;
+    private String provincia;
     private ArrayList <Producto> productos;
     private ArrayList <Empleado> empleados;
-    public Tienda(String nombre, String ciudad) {
+    public Tienda(int id, String nombre, String ciudad, String provincia) {
+        this.id=id;
         this.nombre = nombre;
         this.ciudad = ciudad;
+        this.provincia=provincia;
         empleados=new ArrayList();
         productos=new ArrayList();
     }
@@ -47,6 +51,14 @@ public class Tienda {
         this.productos = productos;
     }
 
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
+    }
+    
     public ArrayList<Empleado> getEmpleados() {
         return empleados;
     }
@@ -83,13 +95,15 @@ public class Tienda {
 
     @Override
     public String toString() {
-        return "Tenda{" + "nombre=" + nombre + ", ciudad=" + ciudad + ", productos=" + productos + ", empleados=" + empleados + '}';
+        return "Tienda{" + "id=" + id + ", nombre=" + nombre + ", ciudad=" + ciudad + ", provincia=" + provincia + ", productos=" + productos + ", empleados=" + empleados + '}';
     }
+
+    
 
     @Override
     public boolean equals(Object obj) {
         Tienda t=(Tienda)obj;
-       if(this.nombre.equals(t.nombre)&& this.ciudad.equals(t.ciudad)){
+       if(this.nombre.equals(t.nombre)&& this.ciudad.equals(t.ciudad)&&this.provincia.equals(t.provincia)){
            return true;
        }else{
            return false;
