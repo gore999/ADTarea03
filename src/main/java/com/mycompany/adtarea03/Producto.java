@@ -9,17 +9,18 @@ package com.mycompany.adtarea03;
  *
  * @author Carlos
  */
-class Producto {
+public class Producto {
+
     private int identificador;
+    private String nombre;
     private String descripcion;
     private double precio;
-    private int cantidad;
 
-    public Producto(int identificador, String descripcion, double precio, int cantidad) {
+    public Producto(int identificador, String nombre, String descripcion, double precio) {
         this.identificador = identificador;
+        this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
-        this.cantidad = cantidad;
     }
 
     public int getIdentificador() {
@@ -46,17 +47,23 @@ class Producto {
         this.precio = precio;
     }
 
-    public int getCantidad() {
-        return cantidad;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     @Override
     public String toString() {
-        return "Producto{" + "identificador=" + identificador + ", descripcion=" + descripcion + ", precio=" + precio + ", cantidad=" + cantidad + '}';
+        return "Producto{" + "identificador=" + identificador + ", descripcion=" + descripcion + ", precio=" + precio + '}';
     }
-    
+
+    @Override
+    public boolean equals(Object obj) {
+        //Dos productos son iguales si tienen la misma id.
+        return ((Producto) obj).identificador == this.identificador; //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

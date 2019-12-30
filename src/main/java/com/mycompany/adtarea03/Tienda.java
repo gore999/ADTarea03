@@ -6,6 +6,8 @@
 package com.mycompany.adtarea03;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -16,15 +18,18 @@ public class Tienda {
     private String nombre;
     private String ciudad;
     private String provincia;
-    private ArrayList <Producto> productos;
-    private ArrayList <Empleado> empleados;
+    //Creamos 2 Maps
+    //Productos: Relacion id del producto con su cantidad. 
+    private Map<Integer,Integer> productos;
+    //Empleados: Relacion id del empleado con las horas que hace en la tienda.
+    private Map <Integer,Double> empleados;
     public Tienda(int id, String nombre, String ciudad, String provincia) {
         this.id=id;
         this.nombre = nombre;
         this.ciudad = ciudad;
         this.provincia=provincia;
-        empleados=new ArrayList();
-        productos=new ArrayList();
+        empleados=new HashMap();
+        productos=new HashMap();
     }
 
     public String getNombre() {
@@ -43,13 +48,6 @@ public class Tienda {
         this.ciudad = ciudad;
     }
 
-    public ArrayList<Producto> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(ArrayList<Producto> productos) {
-        this.productos = productos;
-    }
 
     public String getProvincia() {
         return provincia;
@@ -59,39 +57,14 @@ public class Tienda {
         this.provincia = provincia;
     }
     
-    public ArrayList<Empleado> getEmpleados() {
-        return empleados;
-    }
 
-    public void setEmpleados(ArrayList<Empleado> empleados) {
-        this.empleados = empleados;
-    }
     public void insertProducto(Producto p){
-        this.productos.add(p);
+        
     }
     public void deleteProducto(Producto p){
         this.productos.remove(p);
     }
-    public Producto searchProducto(int identificador){
-        Producto pAux=null;
-        for (Producto p:productos){
-            if(p.getIdentificador()==identificador){
-                pAux=p;
-                break;//rompo el bucle si encuentro una coincidencia.
-            }
-        }
-        return pAux;
-    }
-    public Empleado searchEmpregado(String nombre, String Apellido){
-        Empleado eAux=null;
-        for (Empleado e:empleados){
-            if(e.getNombre()==nombre && e.getApellidos()==Apellido){
-                eAux=e;
-                break;
-            }
-        }
-        return eAux;
-    }
+
 
     @Override
     public String toString() {
