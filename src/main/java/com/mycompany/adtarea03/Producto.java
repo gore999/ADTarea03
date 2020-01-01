@@ -65,5 +65,5 @@ public class Producto {
         //Dos productos son iguales si tienen la misma id.
         return ((Producto) obj).identificador == this.identificador; //To change body of generated methods, choose Tools | Templates.
     }
-
+    
 }

@@ -9,10 +9,18 @@ package com.mycompany.adtarea03;
  *
  * @author Carlos
  */
-public class Cliente{
+public class Cliente {
+
     private String email;
     private String nombre;
     private String apellidos;
+
+    public Cliente(String nombre, String apellidos, String email) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email;
+    }
+//GETTERS Y SETTERS
     public String getNombre() {
         return nombre;
     }
@@ -28,12 +36,6 @@ public class Cliente{
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
     }
-    
-    public Cliente( String nombre, String apellidos, String email) {
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.email = email;
-    }
 
     public String getEmail() {
         return email;
@@ -48,7 +50,10 @@ public class Cliente{
         return "Cliente{" + "email=" + email + ", nombre=" + nombre + ", apellidos=" + apellidos + '}';
     }
 
+    @Override
+    public boolean equals(Object obj) {//Dos clientes son iguales si tienen el mismo email.
+        return ((Cliente)obj).getEmail().equals(this.getEmail()); //To change body of generated methods, choose Tools | Templates.
+    }
     
-    
-    
+
 }
