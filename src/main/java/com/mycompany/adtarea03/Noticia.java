@@ -9,22 +9,43 @@ package com.mycompany.adtarea03;
  *
  * @author Carlos
  */
-public class Noticia {//Clase para albergar los datos de una noticia. 
-    String texto;//Contiene el titular de la noticia.
-    //Dejamos el constructor por defecto.
-    //Getters y Setters 
-    public String getTexto() {
-        return texto;
+public class Noticia {
+    String titular;//Contiene el titular de la noticia.
+    String noticia;
+    String date;
+    public String getTitular() {
+        return titular;
     }
-    public void setTexto(String texto) {
-        this.texto = texto;
+
+    public void setTitular(String titular) {
+        this.titular = titular;
+    }
+
+    public String getNoticia() {
+        return noticia;
+    }
+
+    public void setNoticia(String noticia) {
+        this.noticia = noticia;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    //Clase para albergar los datos de una noticia.
+    public void setDate(String date) {
+        this.date = date;
     }
 
     @Override
     public String toString() {
-        return "************************************************************************************************\nNoticia:\n" + texto 
-                + "\n************************************************************************************************\n";
+        String salida="NOTICIA: "+titular+"     ("+date+")\n";
+        salida+=noticia+"\n--------------------------------------------------------------------------------------------\n\n";
+       
+        return salida;
     }
+    
     
     
 }
