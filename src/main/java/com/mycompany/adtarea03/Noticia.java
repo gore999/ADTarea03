@@ -41,7 +41,7 @@ public class Noticia {
     @Override
     public String toString() {
         String salida="NOTICIA: "+titular+"     ("+date+")\n";
-        salida+=noticia+"\n--------------------------------------------------------------------------------------------\n\n";
+        salida+="\n--------------------------------------------------------------------------------------------\n\n";
        
         return salida;
     }
