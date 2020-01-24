@@ -55,16 +55,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     Tienda tiendaAux;
     Producto productoAux;
     Empleado empleadoAux;
-
+    provincias prov ;
     public VentanaPrincipal() {
         //Obtener provincias del json
-        provincias prov = getProvincias();
+        
         //Crear tablas
         Repositorio rep = Repositorio.getInstance();
-        rep.createTables();//Creamos las tablas (llevan clausula if not exist, solo se crean si las tablas no existen ya).
-        rep.guardarProvincias(prov);//Guardamos las provincias
+        //Comprobar si existe el archivo de datos, si no es así, se crean las tablas, y se añaden las provincias)
+        File datos = new File("datosTienda.db");
+        if (!datos.exists()) {//Si no existe el fichero....
+            rep.createTables();//Creamos las tablas (llevan clausula if not exist, solo se crean si las tablas no existen ya).
+            prov = getProvincias();//Leemos las provincias del JSON
+            rep.guardarProvincias(prov);//Guardamos las provincias
+        }else{
+            prov=rep.getProvinciasOBJ();
+        }
         initComponents();
-        
         addProvinciasToComboBox(prov);// Añadir las provincias al combobox de provincias.
         //Captar datos de las tablas sqlite.
         tiendas = rep.getAllTiendas();
@@ -990,7 +996,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         this.labelTiendaSeleccionada.setText("No hay tienda seleccionada");
         this.TablaProductosXTienda.repaint();
         this.TablaEmpXTienda.repaint();
-        
+
     }//GEN-LAST:event_buttonDeleteTiendaActionPerformed
     /*
         Borrar un producto de todo el catalogo de la franquicia. Borra el producto y todas sus relaciones. Actualiza tabla oferta y tabla productos de la tienda. 
@@ -1161,7 +1167,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         String nombre = this.textNombreCliente.getText().trim();
         String apel = this.textApellidosCliente.getText().trim();
         String email = this.textEmailCliente.getText().trim();
-        System.out.println(nombre.isEmpty()+" "+apel.isEmpty()+" "+email.isEmpty());
+        System.out.println(nombre.isEmpty() + " " + apel.isEmpty() + " " + email.isEmpty());
         System.out.println(nombre);
         if (!nombre.isEmpty() && !apel.isEmpty() && !email.isEmpty()) {
             Cliente c = new Cliente(nombre, apel, email);
@@ -1169,7 +1175,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             rep.addCliente(c, this.clientes);
             this.TablaClientes.repaint();
             this.TablaClientes.revalidate();
-        }else{
+        } else {
             mensajeError("Todos los campos deben de estar cubiertos");
         }
     }//GEN-LAST:event_buttonAddClienteActionPerformed
@@ -1191,13 +1197,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void buttonCargarNoticiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCargarNoticiasActionPerformed
         // TODO add your handling code here:
-        SAXParserFactory factory=SAXParserFactory.newInstance();
-        String f="http://ep00.epimg.net/rss/elpais/portada.xml";
-        MiHandler hd=new MiHandler();
+        SAXParserFactory factory = SAXParserFactory.newInstance();
+        String f = "http://ep00.epimg.net/rss/elpais/portada.xml";
+        MiHandler hd = new MiHandler();
         try {
-            SAXParser parser=factory.newSAXParser();
+            SAXParser parser = factory.newSAXParser();
             parser.parse(f, hd);
-            
+
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SAXException ex) {
@@ -1205,12 +1211,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String bloqueNoticias="";
-        for(Noticia n:hd.noticias){
-            bloqueNoticias+=n.toString();
+        String bloqueNoticias = "";
+        for (Noticia n : hd.noticias) {
+            bloqueNoticias += n.toString();
         }
-        bloqueNoticias=bloqueNoticias.replace("<p>", "\n");
-        bloqueNoticias=bloqueNoticias.replace("</p>", "\n");
+        bloqueNoticias = bloqueNoticias.replace("<p>", "\n");
+        bloqueNoticias = bloqueNoticias.replace("</p>", "\n");
         this.textAreaNoticias.setText(bloqueNoticias);
     }//GEN-LAST:event_buttonCargarNoticiasActionPerformed
 
@@ -1388,12 +1394,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     private void vaciarProducto() {
-        this.productoAux=null;
+        this.productoAux = null;
         this.labelProductoSeleccionado.setText("No hay ningun producto seleccionado");
     }
 
     private void vaciarEmpleado() {
-        this.empleadoAux=null;
+        this.empleadoAux = null;
         this.labelEmpleadoSeleccionado.setText("No hay ningun empleado seleccionado");
     }
 

@@ -114,8 +114,6 @@ public class Repositorio {//Clase singleton para operar con datos.
         } catch (SQLException ex) {
             Logger.getLogger(Repositorio.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("rtdo." + tiendas.size());
-
         return tiendas;
     }
 
@@ -131,14 +129,11 @@ public class Repositorio {//Clase singleton para operar con datos.
                 String descripcion = rs.getString("descripcion");
                 Float prezo = rs.getFloat("prezo");
                 Producto p = new Producto(id, nome, descripcion, prezo);
-                System.out.println(p.toString());
                 productos.add(p);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Repositorio.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("rtdo." + productos.size());
-
         return productos;
     }
 
@@ -505,5 +500,28 @@ public class Repositorio {//Clase singleton para operar con datos.
             Logger.getLogger(Repositorio.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    provincias getProvinciasOBJ() {
+        provincias provsOBJ=new provincias();
+        //Obtener datos de la BD.
+        String sql = "SELECT * FROM provincias";
+        try {
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {//Recuperar datos del resultset.
+                Provincia p=new Provincia();
+                int id = rs.getInt("id");
+                String nombre = rs.getString("nombre");
+                p.setId(id);
+                p.setNome(nombre);
+                //Añadimos los datos a los arraylists.
+                provsOBJ.provincias.add(p);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Repositorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return provsOBJ;//Devuelve el objeto de la clase provincias
     }
 }
