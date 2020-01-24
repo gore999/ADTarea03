@@ -62,7 +62,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //Crear tablas
         Repositorio rep = Repositorio.getInstance();
         rep.createTables();//Creamos las tablas (llevan clausula if not exist, solo se crean si las tablas no existen ya).
+        rep.guardarProvincias(prov);//Guardamos las provincias
         initComponents();
+        
         addProvinciasToComboBox(prov);// Añadir las provincias al combobox de provincias.
         //Captar datos de las tablas sqlite.
         tiendas = rep.getAllTiendas();
@@ -1367,8 +1369,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             try {
                 this.ComboProvincia.addItem(p.getNome());
             } catch (Exception exx) {
+                System.out.println("Error");
             }
-            System.out.println("Error al cargar provincias");
         }
     }
 

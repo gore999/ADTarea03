@@ -78,6 +78,10 @@ public class Repositorio {//Clase singleton para operar con datos.
                 + "idproduto INTEGER NOT NULL,"
                 + "cantidad INTEGER NOT NULL,"
                 + "PRIMARY KEY(idTenda,idProduto))";
+        String sqlProvincias = "CREATE TABLE IF NOT EXISTS provincias("
+                + "id INTEGER NOT NULL,"
+                + "nombre STRING NOT NULL,"
+                + "PRIMARY KEY(id))";
         try {
             st = con.createStatement();
             st.execute(sqlTiendas);
@@ -86,6 +90,7 @@ public class Repositorio {//Clase singleton para operar con datos.
             st.execute(sqlEmpleados);
             st.execute(sqlEmpleadosTiendas);
             st.execute(sqlProductosTiendas);
+            st.execute(sqlProvincias);
         } catch (SQLException ex) {
             Logger.getLogger(Repositorio.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -468,7 +473,7 @@ public class Repositorio {//Clase singleton para operar con datos.
             } catch (SQLException ex) {
                 Logger.getLogger(Repositorio.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else{ 
+        } else {
             JOptionPane.showMessageDialog(null, "El cliente ya existe", "Error", 0);
         }
     }
@@ -481,9 +486,24 @@ public class Repositorio {//Clase singleton para operar con datos.
             pstmt.setString(2, c.getApellidos());
             pstmt.setString(3, c.getEmail());
             pstmt.execute();
-            clientes.remove(c);//Añadir la tienda al arraylist.
+            clientes.remove(c);//Quitar el cliente del arraylist.
         } catch (SQLException ex) {
             Logger.getLogger(Repositorio.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    void guardarProvincias(provincias prov) {
+        String sql = "REPLACE INTO provincias (id, nombre) VALUES (?,?)";
+        try {
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            for (Provincia p : prov.provincias) {//Para cada provincia, guardamos su valor con Replace en la tabla.
+                pstmt.setInt(1, p.getId());
+                pstmt.setString(2, p.getNome());
+                pstmt.execute();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Repositorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }

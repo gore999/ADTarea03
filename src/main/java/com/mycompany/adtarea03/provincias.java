@@ -12,5 +12,6 @@ import java.util.ArrayList;
  * @author Carlos
  */
 public class provincias {
+    //Creo esta clase porque es la forma, al menos la que he encotrado, para recuperar los datos desde el JSON. 
     ArrayList<Provincia> provincias;
 }
